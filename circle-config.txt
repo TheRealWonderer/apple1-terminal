@@ -1,0 +1,2 @@
+framebuffer_width=640
+framebuffer_height=384
