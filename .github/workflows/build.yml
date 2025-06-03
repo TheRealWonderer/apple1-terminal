@@ -1,0 +1,43 @@
+name: Build Apple-1 Terminal
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Install Dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y cmake gcc-arm-none-eabi build-essential
+
+    - name: Clone Circle Framework
+      run: |
+        git clone --depth=1 https://github.com/rsta2/circle.git ~/circle
+
+    - name: Configure CMake
+      run: |
+        mkdir build
+        cd build
+        cmake .. -DCIRCLE_HOME=$HOME/circle
+
+    - name: Build kernel8.img
+      run: |
+        cd build
+        make
+
+    - name: Upload kernel8.img
+      uses: actions/upload-artifact@v4
+      with:
+        name: kernel8.img
+        path: build/kernel8.img
+
