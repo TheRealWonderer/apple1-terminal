@@ -20,12 +20,12 @@ jobs:
         sudo apt update
         sudo apt install -y cmake gcc-arm-none-eabi build-essential
 
-     - name: Clone Circle Framework with cmake support
-      run: |
-        git clone https://github.com/rsta2/circle.git ~/circle
-        mkdir -p ~/circle/cmake
-        curl -sSL https://raw.githubusercontent.com/rsta2/circle/master/cmake/toolchain-gcc.cmake -o ~/circle/cmake/toolchain-gcc.cmake
-        curl -sSL https://raw.githubusercontent.com/rsta2/circle/master/cmake/circle.cmake -o ~/circle/cmake/circle.cmake
+         - name: Clone Circle Framework with cmake support
+            run: |
+            git clone https://github.com/rsta2/circle.git ~/circle
+            mkdir -p ~/circle/cmake
+            curl -sSL https://raw.githubusercontent.com/rsta2/circle/master/cmake/toolchain-gcc.cmake -o ~/circle/cmake/toolchain-gcc.cmake
+            curl -sSL https://raw.githubusercontent.com/rsta2/circle/master/cmake/circle.cmake -o ~/circle/cmake/circle.cmake
 
 
     - name: Configure CMake
