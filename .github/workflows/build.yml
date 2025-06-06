@@ -22,7 +22,7 @@ jobs:
 
       - name: Clone Circle Framework (mit cmake support)
         run: |
-          git clone https://github.com/wonderbuilds/circle.git ~/circle
+          git clone https://github.com/rsta2/circle.git ~/circle
 
       - name: Configure CMake
         run: |
