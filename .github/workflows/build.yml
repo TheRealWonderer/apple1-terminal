@@ -12,34 +12,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-    - name: Install Dependencies
-      run: |
-        sudo apt update
-        sudo apt install -y cmake gcc-arm-none-eabi build-essential
-        
-    - name: Clone Circle Framework with cmake support
-      run: |
-        git clone https://github.com/rsta2/circle.git ~/circle
-        mkdir -p ~/circle/cmake
-        curl -sSL https://raw.githubusercontent.com/rsta2/circle/master/cmake/toolchain-gcc.cmake -o ~/circle/cmake/toolchain-gcc.cmake
-        curl -sSL https://raw.githubusercontent.com/rsta2/circle/master/cmake/circle.cmake -o ~/circle/cmake/circle.cmake
+      - name: Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y cmake gcc-arm-none-eabi build-essential
 
-    - name: Configure CMake
-      run: |
-        mkdir build
-        cd build
-        cmake .. -DCIRCLE_HOME=$HOME/circle
+      - name: Clone Circle Framework with cmake support
+        run: |
+          git clone https://github.com/rsta2/circle.git ~/circle
+          mkdir -p ~/circle/cmake
+          curl -sSL https://raw.githubusercontent.com/rsta2/circle/master/cmake/toolchain-gcc.cmake -o ~/circle/cmake/toolchain-gcc.cmake
+          curl -sSL https://raw.githubusercontent.com/rsta2/circle/master/cmake/circle.cmake -o ~/circle/cmake/circle.cmake
 
-    - name: Build kernel8.img
-      run: |
-        cd build
-        make
+      - name: Configure CMake
+        run: |
+          mkdir build
+          cd build
+          cmake .. -DCIRCLE_HOME=$HOME/circle
 
-    - name: Upload kernel8.img
-      uses: actions/upload-artifact@v4
-      with:
-        name: kernel8.img
-        path: build/kernel8.img
+      - name: Build kernel8.img
+        run: |
+          cd build
+          make
+
+      - name: Upload kernel8.img
+        uses: actions/upload-artifact@v4
+        with:
+          name: kernel8.img
+          path: build/kernel8.img
